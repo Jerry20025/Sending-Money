@@ -1,6 +1,8 @@
 
 export default function() {
-    return <div>
+    return <div className="flex justify-center items-center ">
+        <div>
         Transactions
+        </div>
     </div>
 }

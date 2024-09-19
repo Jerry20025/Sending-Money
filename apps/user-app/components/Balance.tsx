@@ -1,6 +1,5 @@
 "use client";
-
-import { useBalance } from "@repo/store/balance";
+import { useBalance } from '../../../packages/store/src/hooks/useBalance';
 
 function Balance() {
 	const value = useBalance();

@@ -10,18 +10,21 @@ app.post("/hdfcWebhook", async (req, res) => {
     const paymentInformation: {
         token: string;
         userId: string;
-        amount: string
+        amount: string;
     } = {
         token: req.body.token,
         userId: req.body.user_identifier,
-        amount: req.body.amount
+        amount: req.body.amount,
     };
 
    
   try {
     // Log the payment information for debugging purposes
     console.log('Received payment information:', paymentInformation);
-
+    const check={
+      token: paymentInformation.token,
+      status: 'Processing'
+    }
     await db.$transaction([
       db.balance.updateMany({
         where: {
@@ -35,7 +38,18 @@ app.post("/hdfcWebhook", async (req, res) => {
       }),
       db.onRampTransaction.updateMany({
         where: {
-          token: paymentInformation.token,
+          AND: [
+            {
+              token: {
+                contains: paymentInformation.token,
+              },
+            },
+            {
+              status: {
+                equals: 'Processing',
+              },
+            },
+          ],
         },
         data: {
           status: 'Success',

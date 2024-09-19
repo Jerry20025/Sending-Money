@@ -6,6 +6,10 @@
     "recoil": "^0.7.7"
   },
   "exports": {
-    "./balance": "./src/hooks/useBalance"
+    "./balance": "./src/hooks/useBalance",
+    "./GetAmount":"./src/hooks/useAmount",
+    "./getBalance":"./src/hooks/getBalance",
+    "./RampTransaction":"./src/hooks/RampTransaction.ts",
+    "./p2pTransaction":"./src/hooks/p2pTransaction.ts"
   }
 }
